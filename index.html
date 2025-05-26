@@ -31,21 +31,21 @@
       position: absolute;
       top: 200px;
       left: 200px;
-      z-index: 2;
+      z-index: 5;
       border-radius: 50%;
     }
 
-    .flecha-lateral {
+    .flecha-arriba {
       position: absolute;
-      top: 220px;
-      left: 510px;
-      font-size: 50px;
+      top: -40px;
+      left: 235px;
+      font-size: 40px;
       z-index: 10;
-      transform: rotate(0deg); /* ya apunta hacia la derecha por defecto */
+      transform: rotate(180deg); /* apunta hacia abajo */
     }
 
     #spin {
-      margin-top: 40px;
+      margin-top: 50px;
       padding: 12px 25px;
       font-size: 18px;
       background-color: #f47c50;
@@ -70,9 +70,9 @@
     </p>
 
     <div class="wheel-container">
+      <div class="flecha-arriba">⬇️</div>
       <canvas id="wheel" width="500" height="500"></canvas>
       <img src="assets/logo.png" alt="Logo Security Easy" class="logo">
-      <div class="flecha-lateral">➡️</div> <!-- ← Aquí está la flecha derechita -->
     </div>
 
     <button id="spin">GIRAR</button>
