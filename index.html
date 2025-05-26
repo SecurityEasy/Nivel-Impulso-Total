@@ -20,9 +20,23 @@
       margin-bottom: 20px;
     }
 
-    .wheel-container {
+    .wheel-section {
       position: relative;
       display: inline-block;
+    }
+
+    .flecha-fija {
+      font-size: 48px;
+      margin-bottom: -30px;
+      z-index: 10;
+      position: relative;
+    }
+
+    .wheel-container {
+      position: relative;
+      width: 500px;
+      height: 500px;
+      margin: 0 auto;
     }
 
     .logo {
@@ -34,15 +48,6 @@
       z-index: 5;
       border-radius: 50%;
       pointer-events: none;
-    }
-
-    .flecha-arriba {
-      position: absolute;
-      top: -30px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 48px;
-      z-index: 10;
     }
 
     #spin {
@@ -70,10 +75,13 @@
       Recuerda que sólo puedes girar la ruleta una vez. Tu premio nos llegará en automático por correo. ¡Mucha suerte!
     </p>
 
-    <div class="wheel-container">
-      <div class="flecha-arriba">⬇️</div>
-      <canvas id="wheel" width="500" height="500"></canvas>
-      <img src="assets/logo.png" alt="Logo Security Easy" class="logo">
+    <div class="wheel-section">
+      <div class="flecha-fija">⬇️</div>
+
+      <div class="wheel-container">
+        <canvas id="wheel" width="500" height="500"></canvas>
+        <img src="assets/logo.png" alt="Logo Security Easy" class="logo">
+      </div>
     </div>
 
     <button id="spin">GIRAR</button>
