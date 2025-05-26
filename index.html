@@ -37,10 +37,11 @@
 
     .flecha-lateral {
       position: absolute;
-      top: 220px;
-      left: 510px;
+      top: 215px;
+      left: 500px;
       font-size: 40px;
       z-index: 10;
+      transform: rotate(90deg); /* Gira la flecha para que apunte hacia la ruleta */
     }
 
     #spin {
@@ -71,7 +72,7 @@
     <div class="wheel-container">
       <canvas id="wheel" width="500" height="500"></canvas>
       <img src="assets/logo.png" alt="Logo Security Easy" class="logo">
-      <div class="flecha-lateral">➡️</div>
+      <div class="flecha-lateral">⬅️</div>
     </div>
 
     <button id="spin">GIRAR</button>
