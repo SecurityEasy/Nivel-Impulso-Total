@@ -61,16 +61,12 @@ const spinWheel = () => {
     alert("No tienes un token válido.");
     return;
   }
-
-  if (localStorage.getItem("giro_" + token)) {
+  if (girado) {
     alert("Ya has girado la ruleta.");
-    spinButton.disabled = true;
     return;
   }
 
   isSpinning = true;
-  spinButton.disabled = true;
-
   const randomIndex = Math.floor(Math.random() * premios.length);
   const degreesPerPrize = 360 / premios.length;
   const rotation = 360 * 5 + randomIndex * degreesPerPrize + degreesPerPrize / 2;
@@ -96,16 +92,16 @@ const spinWheel = () => {
       requestAnimationFrame(animate);
     } else {
       isSpinning = false;
-
       const finalAngle = (angle % 360 + 360) % 360;
-      const index = Math.floor(((360 - finalAngle + degreesPerPrize / 2) % 360) / degreesPerPrize);
+      const index = Math.floor((premios.length - (finalAngle / (360 / premios.length))) % premios.length);
       const premio = premios[index];
-
       resultado.textContent = "¡Felicidades! Ganaste: " + premio;
-
       localStorage.setItem("giro_" + token, true);
 
-      fetch("https://script.google.com/macros/s/AKfycby40xDc5j_S72PdeS-jwoh64_ZSdACLswAnCNJAuLTqu-VFrs7CIl55rkeUU0Yu93tU/exec?token=" + token + "&premio=" + encodeURIComponent(premio));
+      fetch("https://script.google.com/macros/s/AKfycby40xDc5j_S72PdeS-jwoh64_ZSdACLswAnCNJAuLTqu-VFrs7CIl55rkeUU0Yu93tU/exec?token=" + token + "&premio=" + encodeURIComponent(premio))
+        .then(response => response.text())
+        .then(data => console.log("✅ Premio registrado: ", data))
+        .catch(error => console.error("❌ Error al registrar premio:", error));
     }
   };
 
@@ -120,14 +116,9 @@ window.addEventListener("resize", () => {
   drawWheel();
 });
 
-// 🔐 Evita giro si ya se giró antes
-if (localStorage.getItem("giro_" + token)) {
-  spinButton.disabled = true;
-  resultado.textContent = "Ya has girado la ruleta.";
-}
-
 spinButton.addEventListener("click", () => {
   if (!isSpinning) {
     spinWheel();
   }
 });
+
