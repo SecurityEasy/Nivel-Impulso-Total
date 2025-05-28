@@ -45,9 +45,8 @@ canvas#wheel {
 .flecha {
   position: absolute;
   top: 50%;
-  left: calc(50% + 250px - 15px); /* 250px es el radio del canvas */
-  width: 30px;
-  height: auto;
+  left: 100%;
+  width: 40px;
   transform: translateY(-50%);
   z-index: 10;
 }
