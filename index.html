@@ -2,35 +2,95 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TEST Ruleta</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hot Sale Security Easy – Nivel Impulso Total</title>
+  <link rel="stylesheet" href="style.css"/>
   <style>
-    .wheel-container {
-      position: relative;
-      width: 300px;
-      aspect-ratio: 1 / 1;
-      margin: 50px auto;
-      border: 2px dashed #ccc;
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
     }
 
-    canvas {
-      width: 100%;
-      height: 100%;
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .wheel-container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    canvas#wheel {
+      max-width: 100%;
+      height: auto;
+      z-index: 1;
     }
 
     .logo {
       position: absolute;
+      width: 80px;
+      height: 80px;
+      z-index: 2;
       top: 50%;
       left: 50%;
-      width: 80px;
       transform: translate(-50%, -50%);
+    }
+
+    .flecha {
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      z-index: 3;
+    }
+
+    button#spin {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #f77f00;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    button#spin:hover {
+      background-color: #d65f00;
+    }
+
+    #resultado {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <div class="wheel-container">
-    <canvas id="wheel" width="300" height="300"></canvas>
-    <img src="assets/logo.png" alt="Logo" class="logo" />
+  <div class="container">
+    <h1>¡Gira la ruleta y gana increíbles premios!</h1>
+    <p class="instrucciones">
+      Recuerda que sólo puedes girar la ruleta una vez. Tu premio nos llegará en automático por correo. ¡Mucha suerte!
+    </p>
+
+    <div class="wheel-container">
+      <canvas id="wheel" width="500" height="500"></canvas>
+      <img src="assets/logo.png" alt="Logo Security Easy" class="logo">
+      <img src="assets/flecha.png" alt="Flecha" class="flecha" />
+    </div>
+
+    <button id="spin">GIRAR</button>
+    <p id="resultado"></p>
   </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
