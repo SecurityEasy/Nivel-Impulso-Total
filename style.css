@@ -65,11 +65,12 @@ button#spin:hover {
 
 .flecha {
   position: absolute;
-  right: -40px;
+  right: 10px; /* antes estaba -40px, ahora cerquita de la ruleta */
   top: 50%;
-  transform: translateY(-50%) scaleX(-1); /* ← Esto la voltea horizontalmente */
-  width: 40px;
+  transform: translateY(-50%) scaleX(-1); /* la mantiene volteada */
+  width: 30px;
   height: auto;
+  z-index: 10;
 }
 
 #resultado {
