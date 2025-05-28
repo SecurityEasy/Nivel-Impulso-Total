@@ -16,18 +16,13 @@ const resultado = document.getElementById("resultado");
 const token = new URLSearchParams(window.location.search).get("token");
 let girado = localStorage.getItem("giro_" + token);
 
-// Ajustar tamaño del canvas al cargar
-const resizeCanvas = () => {
-  const size = Math.min(window.innerWidth * 0.9, 500); // máx 500px
-  canvas.width = size;
-  canvas.height = size;
-};
+let canvasSize = 500;
 
-resizeCanvas(); // ajustar al inicio
-window.addEventListener("resize", () => {
-  resizeCanvas();
-  drawWheel(); // redibujar al cambiar tamaño
-});
+const resizeCanvas = () => {
+  canvasSize = Math.min(window.innerWidth * 0.9, 500);
+  canvas.width = canvasSize;
+  canvas.height = canvasSize;
+};
 
 const drawWheel = () => {
   const numPremios = premios.length;
@@ -49,7 +44,7 @@ const drawWheel = () => {
     ctx.translate(cx, cy);
     ctx.rotate(angle + arc / 2);
     ctx.textAlign = "right";
-    ctx.font = `${canvas.width * 0.04}px Arial`;
+    ctx.font = `${canvasSize * 0.04}px Arial`;
     ctx.fillText(premios[i], radius - 10, 10);
     ctx.restore();
   }
@@ -98,7 +93,6 @@ const spinWheel = () => {
       resultado.textContent = "¡Felicidades! Ganaste: " + premio;
       localStorage.setItem("giro_" + token, true);
 
-      // Enviar al Web App
       fetch("https://script.google.com/macros/s/AKfycby40xDc5j_S72PdeS-jwoh64_ZSdACLswAnCNJAuLTqu-VFrs7CIl55rkeUU0Yu93tU/exec?token=" + token + "&premio=" + encodeURIComponent(premio));
     }
   };
@@ -106,7 +100,14 @@ const spinWheel = () => {
   requestAnimationFrame(animate);
 };
 
+resizeCanvas();
 drawWheel();
+
+window.addEventListener("resize", () => {
+  resizeCanvas();
+  drawWheel(); // ¡IMPORTANTE! Redibujar ruleta tras cambiar tamaño
+});
+
 spinButton.addEventListener("click", () => {
   if (!isSpinning) {
     spinWheel();
