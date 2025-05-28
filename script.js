@@ -1,4 +1,3 @@
-
 const premios = [
   "Envío Gratis DHL ó 10 Sims Telcel",
   "1 Renovación Anual",
@@ -17,25 +16,41 @@ const resultado = document.getElementById("resultado");
 const token = new URLSearchParams(window.location.search).get("token");
 let girado = localStorage.getItem("giro_" + token);
 
+// Ajustar tamaño del canvas al cargar
+const resizeCanvas = () => {
+  const size = Math.min(window.innerWidth * 0.9, 500); // máx 500px
+  canvas.width = size;
+  canvas.height = size;
+};
+
+resizeCanvas(); // ajustar al inicio
+window.addEventListener("resize", () => {
+  resizeCanvas();
+  drawWheel(); // redibujar al cambiar tamaño
+});
+
 const drawWheel = () => {
   const numPremios = premios.length;
   const arc = (2 * Math.PI) / numPremios;
+  const cx = canvas.width / 2;
+  const cy = canvas.height / 2;
+  const radius = canvas.width / 2;
 
   for (let i = 0; i < numPremios; i++) {
     const angle = i * arc;
     ctx.beginPath();
     ctx.fillStyle = colors[i % colors.length];
-    ctx.moveTo(250, 250);
-    ctx.arc(250, 250, 250, angle, angle + arc);
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, radius, angle, angle + arc);
     ctx.fill();
 
     ctx.save();
     ctx.fillStyle = "#000";
-    ctx.translate(250, 250);
+    ctx.translate(cx, cy);
     ctx.rotate(angle + arc / 2);
     ctx.textAlign = "right";
-    ctx.font = "16px Arial";
-    ctx.fillText(premios[i], 240, 10);
+    ctx.font = `${canvas.width * 0.04}px Arial`;
+    ctx.fillText(premios[i], radius - 10, 10);
     ctx.restore();
   }
 };
@@ -66,11 +81,12 @@ const spinWheel = () => {
     if (progress > 1) progress = 1;
 
     angle = rotation * progress;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.save();
-    ctx.translate(250, 250);
+    ctx.translate(canvas.width / 2, canvas.height / 2);
     ctx.rotate((angle * Math.PI) / 180);
-    ctx.translate(-250, -250);
+    ctx.translate(-canvas.width / 2, -canvas.height / 2);
     drawWheel();
     ctx.restore();
 
@@ -80,7 +96,6 @@ const spinWheel = () => {
       isSpinning = false;
       const premio = premios[randomIndex];
       resultado.textContent = "¡Felicidades! Ganaste: " + premio;
-
       localStorage.setItem("giro_" + token, true);
 
       // Enviar al Web App
