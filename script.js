@@ -6,7 +6,7 @@ const premios = [
   "1 R83\n+ 5 Sims Telcel"
 ];
 
-const colors = ["#b30000", "#f4cccc", "#f5f5dc", "#b30000", "#f4cccc"];
+const colors = ["#b30000", "#f9c5c5", "#f2e4d5", "#b30000", "#f9c5c5"];
 
 const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
@@ -45,7 +45,12 @@ const drawWheel = () => {
     ctx.rotate(angle + arc / 2);
     ctx.textAlign = "right";
     ctx.font = `${canvasSize * 0.04}px Arial`;
-    ctx.fillText(premios[i], radius - 10, 10);
+
+    const lines = premios[i].split("\n");
+    for (let j = 0; j < lines.length; j++) {
+      ctx.fillText(lines[j], radius - 10, (j - 0.5) * 20);
+    }
+
     ctx.restore();
   }
 };
@@ -89,10 +94,12 @@ const spinWheel = () => {
       requestAnimationFrame(animate);
     } else {
       isSpinning = false;
-      const premio = premios[randomIndex];
+      const premio = premios[randomIndex].replace("\n", " ");
       resultado.textContent = "¡Felicidades! Ganaste: " + premio;
+
       localStorage.setItem("giro_" + token, true);
 
+      // Reemplaza esta URL con la tuya real
       fetch("https://script.google.com/macros/s/AKfycby40xDc5j_S72PdeS-jwoh64_ZSdACLswAnCNJAuLTqu-VFrs7CIl55rkeUU0Yu93tU/exec?token=" + token + "&premio=" + encodeURIComponent(premio));
     }
   };
@@ -105,7 +112,7 @@ drawWheel();
 
 window.addEventListener("resize", () => {
   resizeCanvas();
-  drawWheel(); // ¡IMPORTANTE! Redibujar ruleta tras cambiar tamaño
+  drawWheel();
 });
 
 spinButton.addEventListener("click", () => {
