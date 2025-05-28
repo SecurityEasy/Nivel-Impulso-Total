@@ -1,122 +1,99 @@
-const premios = [
-  "Envío DHL\nó 10 Sims Telcel",
-  "1 Renovación\nAnual",
-  "2 Renovaciones\nAnuales",
-  "1 ET200N\n+ 5 Sims Telcel",
-  "1 R83\n+ 5 Sims Telcel"
-];
-
-const colors = ["#b30000", "#f9c5c5", "#f2e4d5", "#b30000", "#f9c5c5"];
-
-const canvas = document.getElementById("wheel");
-const ctx = canvas.getContext("2d");
-const spinButton = document.getElementById("spin");
-const resultado = document.getElementById("resultado");
-
-const token = new URLSearchParams(window.location.search).get("token");
-let girado = localStorage.getItem("giro_" + token);
-
-let canvasSize = 500;
-
-const resizeCanvas = () => {
-  canvasSize = Math.min(window.innerWidth * 0.9, 500);
-  canvas.width = canvasSize;
-  canvas.height = canvasSize;
-};
-
-const drawWheel = () => {
-  const numPremios = premios.length;
-  const arc = (2 * Math.PI) / numPremios;
-  const cx = canvas.width / 2;
-  const cy = canvas.height / 2;
-  const radius = canvas.width / 2;
-
-  for (let i = 0; i < numPremios; i++) {
-    const angle = i * arc;
-    ctx.beginPath();
-    ctx.fillStyle = colors[i % colors.length];
-    ctx.moveTo(cx, cy);
-    ctx.arc(cx, cy, radius, angle, angle + arc);
-    ctx.fill();
-
-    ctx.save();
-    ctx.fillStyle = "#000";
-    ctx.translate(cx, cy);
-    ctx.rotate(angle + arc / 2);
-    ctx.textAlign = "right";
-    ctx.font = `${canvasSize * 0.04}px Arial`;
-
-    const lines = premios[i].split("\n");
-    for (let j = 0; j < lines.length; j++) {
-      ctx.fillText(lines[j], radius - 10, (j - 0.5) * 20);
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hot Sale Security Easy – Nivel Impulso Total</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      background-color: #111;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
     }
-
-    ctx.restore();
-  }
-};
-
-let angle = 0;
-let isSpinning = false;
-
-const spinWheel = () => {
-  if (!token) {
-    alert("No tienes un token válido.");
-    return;
-  }
-  if (girado) {
-    alert("Ya has girado la ruleta.");
-    return;
-  }
-
-  isSpinning = true;
-  const randomIndex = Math.floor(Math.random() * premios.length);
-  const degreesPerPrize = 360 / premios.length;
-  const rotation = 360 * 5 + randomIndex * degreesPerPrize + degreesPerPrize / 2;
-
-  const duration = 5000;
-  const start = performance.now();
-
-  const animate = (time) => {
-    let progress = (time - start) / duration;
-    if (progress > 1) progress = 1;
-
-    angle = rotation * progress;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.save();
-    ctx.translate(canvas.width / 2, canvas.height / 2);
-    ctx.rotate((angle * Math.PI) / 180);
-    ctx.translate(-canvas.width / 2, -canvas.height / 2);
-    drawWheel();
-    ctx.restore();
-
-    if (progress < 1) {
-      requestAnimationFrame(animate);
-    } else {
-      isSpinning = false;
-      const premio = premios[randomIndex].replace("\n", " ");
-      resultado.textContent = "¡Felicidades! Ganaste: " + premio;
-
-      localStorage.setItem("giro_" + token, true);
-
-      // Reemplaza esta URL con la tuya real
-      fetch("https://script.google.com/macros/s/AKfycby40xDc5j_S72PdeS-jwoh64_ZSdACLswAnCNJAuLTqu-VFrs7CIl55rkeUU0Yu93tU/exec?token=" + token + "&premio=" + encodeURIComponent(premio));
+    h1 {
+      color: #ff3b3b;
+      margin-bottom: 0.3em;
     }
-  };
+    .instrucciones {
+      margin-top: 0;
+      font-size: 1rem;
+      color: #e2e2e2;
+    }
+    .banner {
+      max-width: 300px;
+      margin: 10px auto 0;
+      display: block;
+    }
+    .wheel-container {
+      position: relative;
+      display: inline-block;
+      margin: 30px auto;
+    }
+    #wheel {
+      background-color: transparent;
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    }
+    .logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 80px;
+      height: 80px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+    }
+    .pointer {
+      position: absolute;
+      top: 50%;
+      right: -60px;
+      width: 200px;
+      height: auto;
+      transform: translateY(-50%) rotate(-10deg);
+    }
+    #spin {
+      margin-top: 30px;
+      padding: 12px 30px;
+      background-color: #f78f1e;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    #spin:hover {
+      background-color: #ffb347;
+    }
+    #resultado {
+      font-size: 1.2em;
+      margin-top: 20px;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <img src="assets/HOTSALE.png" alt="Hot Sale Banner" class="banner" />
 
-  requestAnimationFrame(animate);
-};
+  <h1>¡Gira la Security Ruleta y gana grandes premios!</h1>
+  <p class="instrucciones">
+    Recuerda que sólo podrás girar la ruleta una vez, tu premio nos llegará en automático, ¡mucha suerte!
+  </p>
 
-resizeCanvas();
-drawWheel();
+  <div class="wheel-container">
+    <canvas id="wheel" width="500" height="500"></canvas>
+    <img src="assets/logo.png" alt="Logo Security Easy" class="logo" />
+    <img src="assets/fuego.png" alt="Pointer" class="pointer" />
+  </div>
 
-window.addEventListener("resize", () => {
-  resizeCanvas();
-  drawWheel();
-});
+  <button id="spin">GIRAR</button>
+  <p id="resultado"></p>
 
-spinButton.addEventListener("click", () => {
-  if (!isSpinning) {
-    spinWheel();
-  }
-});
+  <script src="script.js"></script>
+</body>
+</html>
+
