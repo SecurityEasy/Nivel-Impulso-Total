@@ -30,7 +30,7 @@
     .wheel-container {
       position: relative;
       display: inline-block;
-      margin: 30px auto;
+      margin: 10px auto;
     }
     #wheel {
       background-color: transparent;
@@ -49,7 +49,7 @@
     .pointer {
       position: absolute;
       top: 50%;
-      right: -60px;
+      right: -70px;
       width: 200px;
       height: auto;
       transform: translateY(-50%) rotate(-10deg);
