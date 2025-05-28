@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Security Easy - Ruleta de Premios</title>
+  <title>Security Ruleta</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -12,13 +12,15 @@
     <p class="instrucciones">
       Recuerda que sólo podrás girar la ruleta una vez, tu premio nos llegará en automático, ¡mucha suerte!
     </p>
-    <div class="wheel-container">
-      <img src="assets/logo.png" alt="Logo Security Easy" class="logo">
-      <canvas id="wheel" width="500" height="500"></canvas>
-      <img src="assets/flecha.png" alt="Flecha" class="flecha">
+    <div class="wheel-wrapper">
+      <div class="wheel-container">
+        <canvas id="wheel"></canvas>
+        <img src="assets/logo.png" alt="Logo" class="logo" />
+        <img src="assets/flecha.png" alt="Flecha" class="flecha" />
+      </div>
       <button id="spin">GIRAR</button>
+      <p id="resultado"></p>
     </div>
-    <p id="resultado"></p>
   </div>
   <script src="script.js"></script>
 </body>
