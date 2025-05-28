@@ -1,9 +1,9 @@
 const premios = [
-  "Envío DHL\nó\n10 Sims Telcel",
-  "1 Renovación Anual",
-  "2 Renovaciones Anuales",
-  "1 ET200N + 5 Sims Telcel",
-  "1 R83 + 5 Sims Telcel"
+  "Envío DHL\nó 10 Sims Telcel",
+  "1 Renovación\nAnual",
+  "2 Renovaciones\nAnuales",
+  "1 ET200N\n+ 5 Sims Telcel",
+  "1 R83\n+ 5 Sims Telcel"
 ];
 
 const colors = ["#c62828", "#f78f1e", "#fce8d5", "#c62828", "#f78f1e"];
