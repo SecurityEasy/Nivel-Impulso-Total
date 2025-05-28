@@ -48,10 +48,10 @@ canvas {
 
 .fuego {
   position: absolute;
-  width: 50px;
+  width: 80px;
   top: 50%;
-  right: -25px;
-  transform: translateY(-50%) rotate(0deg);
+  right: -40px;
+  transform: translateY(-50%) rotate(-45deg);
   z-index: 5;
 }
 
