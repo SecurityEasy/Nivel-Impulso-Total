@@ -36,6 +36,7 @@
       background-color: transparent;
       border-radius: 50%;
       box-shadow: 0 0 20px rgba(255,255,255,0.2);
+      display: block;
     }
     .logo {
       position: absolute;
@@ -49,7 +50,7 @@
     .pointer {
       position: absolute;
       top: 50%;
-      right: -70px;
+      right: -40px;
       width: 200px;
       height: auto;
       transform: translateY(-50%) rotate(-10deg);
