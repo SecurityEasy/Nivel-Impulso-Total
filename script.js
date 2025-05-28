@@ -89,15 +89,21 @@ const spinWheel = () => {
     ctx.restore();
 
     if (progress < 1) {
-      requestAnimationFrame(animate);
-    } else {
-      isSpinning = false;
-      const premio = premios[randomIndex].replace(/\n/g, " ");
-      resultado.textContent = "¡Felicidades! Ganaste: " + premio;
-      localStorage.setItem("giro_" + token, true);
+  requestAnimationFrame(animate);
+} else {
+  isSpinning = false;
 
-      fetch("https://script.google.com/macros/s/AKfycby40xDc5j_S72PdeS-jwoh64_ZSdACLswAnCNJAuLTqu-VFrs7CIl55rkeUU0Yu93tU/exec?token=" + token + "&premio=" + encodeURIComponent(premio));
-    }
+  const finalAngle = (angle % 360 + 360) % 360;
+  const degreesPerPrize = 360 / premios.length;
+  const index = Math.floor(((360 - finalAngle + degreesPerPrize / 2) % 360) / degreesPerPrize);
+  const premio = premios[index];
+
+  resultado.textContent = "¡Felicidades! Ganaste: " + premio;
+
+  localStorage.setItem("giro_" + token, true);
+
+  fetch("https://script.google.com/macros/s/AKfycby40xDc5j_S72PdeS-jwoh64_ZSdACLswAnCNJAuLTqu-VFrs7CIl55rkeUU0Yu93tU/exec?token=" + token + "&premio=" + encodeURIComponent(premio));
+}
   };
 
   requestAnimationFrame(animate);
