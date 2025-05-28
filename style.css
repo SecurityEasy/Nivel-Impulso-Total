@@ -49,9 +49,9 @@ canvas {
 .fuego {
   position: absolute;
   top: 50%;
-  left: calc(50% + 250px);
-  width: 100px;
-  transform: translateY(-50%) rotate(-45deg);
+  left: 50%;
+  width: 60px;
+  transform: translate(240px, -50%) rotate(-45deg); /* ¡Aquí se controla todo! */
   z-index: 10;
   pointer-events: none;
 }
