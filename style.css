@@ -1,135 +1,80 @@
-// 🎯 Ruleta con estilo personalizado tipo imagen promocional
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #111111;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
 
-const premios = [
-  "10 SIMS TELCEL GRATIS",
-  "SIGUE PARTICIPANDO",
-  "1 ET200N GRATIS",
-  "ENVÍO 50%",
-  "REGALO SORPRESA",
-  "SIGUE PARTICIPANDO",
-  "RENOVACIÓN ANUAL GRATIS",
-  "2 ENVIOS GRATIS"
-];
+h1 {
+  color: #ff3c3c;
+  text-align: center;
+  margin-top: 30px;
+}
 
-const colors = [
-  "#9c1c1f", // rojo vino
-  "#f4e7d3", // cremita
-  "#9c1c1f",
-  "#f4e7d3",
-  "#9c1c1f",
-  "#f4e7d3",
-  "#9c1c1f",
-  "#f4e7d3"
-];
+p.instrucciones {
+  max-width: 600px;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 1rem;
+}
 
-const canvas = document.getElementById("wheel");
-const ctx = canvas.getContext("2d");
-const spinButton = document.getElementById("spin");
-const resultado = document.getElementById("resultado");
-const logo = document.querySelector(".logo");
+.wheel-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-const token = new URLSearchParams(window.location.search).get("token");
-let girado = localStorage.getItem("giro_" + token);
+canvas {
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  background-color: #111;
+}
 
-let canvasSize = 500;
+button#spin {
+  margin-top: 30px;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #ff3c3c;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
-const resizeCanvas = () => {
-  canvasSize = Math.min(window.innerWidth * 0.9, 500);
-  canvas.width = canvasSize;
-  canvas.height = canvasSize;
-};
+button#spin:hover {
+  background-color: #e22a2a;
+}
 
-const drawWheel = () => {
-  const numPremios = premios.length;
-  const arc = (2 * Math.PI) / numPremios;
-  const cx = canvas.width / 2;
-  const cy = canvas.height / 2;
-  const radius = canvas.width / 2;
+.logo {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: 50%;
+  z-index: 10;
+  pointer-events: none;
+}
 
-  for (let i = 0; i < numPremios; i++) {
-    const angle = i * arc;
-    ctx.beginPath();
-    ctx.fillStyle = colors[i % colors.length];
-    ctx.moveTo(cx, cy);
-    ctx.arc(cx, cy, radius, angle, angle + arc);
-    ctx.fill();
+.flecha {
+  position: absolute;
+  right: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: auto;
+}
 
-    ctx.save();
-    ctx.translate(cx, cy);
-    ctx.rotate(angle + arc / 2);
-    ctx.fillStyle = "#fff";
-    ctx.font = `${canvasSize * 0.045}px sans-serif`;
-    ctx.textAlign = "center";
-    ctx.fillText(premios[i], 0, -radius + 70);
-    ctx.restore();
-  }
-};
-
-let angle = 0;
-let isSpinning = false;
-
-const spinWheel = () => {
-  if (!token) {
-    alert("No tienes un token válido.");
-    return;
-  }
-  if (girado) {
-    alert("Ya has girado la ruleta.");
-    return;
-  }
-
-  isSpinning = true;
-  const randomIndex = Math.floor(Math.random() * premios.length);
-  const degreesPerPrize = 360 / premios.length;
-  const rotation = 360 * 5 + randomIndex * degreesPerPrize + degreesPerPrize / 2;
-
-  const duration = 5000;
-  const start = performance.now();
-
-  const animate = (time) => {
-    let progress = (time - start) / duration;
-    if (progress > 1) progress = 1;
-
-    angle = rotation * progress;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.save();
-    ctx.translate(canvas.width / 2, canvas.height / 2);
-    ctx.rotate((angle * Math.PI) / 180);
-    ctx.translate(-canvas.width / 2, -canvas.height / 2);
-    drawWheel();
-    ctx.restore();
-
-    if (progress < 1) {
-      requestAnimationFrame(animate);
-    } else {
-      isSpinning = false;
-      const premio = premios[randomIndex];
-      resultado.textContent = "¡Felicidades! Ganaste: " + premio;
-      localStorage.setItem("giro_" + token, true);
-
-      fetch(
-        "https://script.google.com/macros/s/AKfycby40xDc5j_S72PdeS-jwoh64_ZSdACLswAnCNJAuLTqu-VFrs7CIl55rkeUU0Yu93tU/exec?token=" +
-          token +
-          "&premio=" +
-          encodeURIComponent(premio)
-      );
-    }
-  };
-
-  requestAnimationFrame(animate);
-};
-
-resizeCanvas();
-drawWheel();
-
-window.addEventListener("resize", () => {
-  resizeCanvas();
-  drawWheel();
-});
-
-spinButton.addEventListener("click", () => {
-  if (!isSpinning) {
-    spinWheel();
-  }
-});
+#resultado {
+  margin-top: 25px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+}
