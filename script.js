@@ -6,7 +6,7 @@ const premios = [
   "1 R83 + 5 Sims Telcel"
 ];
 
-const colors = ["#ff3c3c", "#a00000", "#fdf1e7", "#f5c518", "#1c1c1c"];
+const colors = ["#c21d2e", "#f6b942", "#e3d1b1", "#851c1c", "#f27a3f"];
 
 const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
