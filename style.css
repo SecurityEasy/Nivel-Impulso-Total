@@ -67,7 +67,7 @@ button#spin:hover {
   position: absolute;
   right: -40px;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%) scaleX(-1); /* ← Esto la voltea horizontalmente */
   width: 40px;
   height: auto;
 }
