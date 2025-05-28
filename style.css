@@ -65,12 +65,12 @@ canvas {
 
 .banner-hot-sale {
   text-align: center;
-  margin-top: 20px;
-  margin-bottom: -10px;
+  margin-top: 10px;
+  margin-bottom: -30px; /
 }
 
 .banner-hot-sale img {
-  width: 200x;
+  width: 280px;
   max-width: 80%;
   height: auto;
 }
