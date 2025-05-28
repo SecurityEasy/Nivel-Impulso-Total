@@ -1,7 +1,8 @@
 body {
+  background-color: #121212;
+  color: #ffffff;
   font-family: 'Arial', sans-serif;
   text-align: center;
-  background: #fff;
   margin: 0;
   padding: 0;
 }
@@ -11,25 +12,26 @@ body {
 }
 
 h1 {
-  color: #d62828;
-  font-size: 24px;
+  color: #ff3c3c;
+  margin-bottom: 10px;
+  font-size: 28px;
 }
 
 .instrucciones {
+  margin-bottom: 30px;
   font-size: 16px;
-  margin-bottom: 20px;
+  color: #cccccc;
 }
 
 .wheel-container {
   position: relative;
-  width: fit-content;
-  margin: 0 auto;
+  display: inline-block;
+  margin-bottom: 20px;
 }
 
-canvas#wheel {
-  max-width: 100%;
-  height: auto;
-  display: block;
+canvas {
+  border-radius: 50%;
+  background-color: #fff;
 }
 
 .logo {
@@ -37,33 +39,42 @@ canvas#wheel {
   top: 50%;
   left: 50%;
   width: 80px;
-  height: auto;
+  height: 80px;
   transform: translate(-50%, -50%);
-  z-index: 5;
+  border-radius: 50%;
+  background-color: white;
+  padding: 5px;
 }
 
 .flecha {
   position: absolute;
   top: 50%;
-  left: 100%;
-  width: 40px;
+  right: -60px;
   transform: translateY(-50%);
-  z-index: 10;
+  width: 60px;
+  height: auto;
 }
 
 #spin {
   margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #f77f00;
+  padding: 12px 24px;
+  font-size: 18px;
+  background-color: #ff3c3c;
+  color: #fff;
   border: none;
-  color: white;
   border-radius: 10px;
   cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#spin:hover {
+  background-color: #e82e2e;
 }
 
 #resultado {
-  margin-top: 20px;
-  font-size: 18px;
+  margin-top: 30px;
+  font-size: 20px;
   font-weight: bold;
+  color: #fdd835;
 }
+
