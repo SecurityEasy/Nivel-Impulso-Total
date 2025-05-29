@@ -121,4 +121,3 @@ spinButton.addEventListener("click", () => {
     spinWheel();
   }
 });
-
