@@ -109,9 +109,13 @@ const spinWheel = () => {
       resultado.textContent = "¡Felicidades! Ganaste: " + premio;
       localStorage.setItem("giro_" + token, true);
 
-      fetch("https://script.google.com/macros/s/AKfycby40xDc5j_S72PdeS-jwoh64_ZSdACLswAnCNJAuLTqu-VFrs7CIl55rkeUU0Yu93tU/exec?token=" + token + "&premio=" + encodeURIComponent(premio))
+       fetch(`https://script.google.com/macros/s/AKfycby40xDc5j_S72PdeS-jwoh64_ZSdACLswAnCNJAuLTqu-VFrs7CIl55rkeUU0Yu93tU/exec?token=${token}&premio=${encodeURIComponent(premio)}`)
         .then(response => response.text())
-        .then(data => console.log("✅ Premio registrado: ", data))
+        .then(data => {
+          console.log("✅ Premio registrado: ", data);
+          girado = true;
+          spinButton.disabled = true;
+        })
         .catch(error => console.error("❌ Error al registrar premio:", error));
     }
   };
