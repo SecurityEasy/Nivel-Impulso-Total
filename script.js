@@ -81,9 +81,9 @@ const spinWheel = () => {
   }
 
   isSpinning = true;
-  const randomIndex = Math.floor(Math.random() * premios.length);
+  const fixedIndex = premios.findIndex(p => p.includes("1 Renovación"));
   const degreesPerPrize = 360 / premios.length;
-  const rotation = 360 * 5 + randomIndex * degreesPerPrize + degreesPerPrize / 2;
+  const rotation = 360 * 5 + fixedIndex * degreesPerPrize + degreesPerPrize / 2;
 
   const duration = 5000;
   const start = performance.now();
