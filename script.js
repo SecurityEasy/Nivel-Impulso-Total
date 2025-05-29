@@ -107,8 +107,7 @@ const spinWheel = () => {
     } else {
       isSpinning = false;
       const finalAngle = (angle % 360 + 360) % 360;
-      const index = Math.floor((premios.length - (finalAngle / (360 / premios.length))) % premios.length);
-      const premio = premios[index];
+      const premio = premios[fixedIndex];
       resultado.textContent = "¡Felicidades! Ganaste: " + premio;
 
       // REGISTRAR PREMIO Y MOSTRAR MENSAJE FLOTANTE
