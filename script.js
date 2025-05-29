@@ -106,7 +106,6 @@ const spinWheel = () => {
       requestAnimationFrame(animate);
     } else {
       isSpinning = false;
-      const finalAngle = (angle % 360 + 360) % 360;
       const premio = premios[fixedIndex];
       resultado.textContent = "¡Felicidades! Ganaste: " + premio;
 
