@@ -16,10 +16,8 @@ const resultado = document.getElementById("resultado");
 const token = new URLSearchParams(window.location.search).get("token");
 let girado = false;
 
-// ✅ URL DE TU APPS SCRIPT
 const endpoint = "https://script.google.com/macros/s/AKfycbwdUXgKYdj2M6qBU12dd3f2hslZsekVZFmhfcnb584LbCPIdl3BlF5ILjjwOQz3njf_/exec";
 
-// Verifica si el token ya fue usado
 fetch(`${endpoint}?check=${token}`)
   .then(res => res.text())
   .then(res => {
@@ -81,6 +79,8 @@ const spinWheel = () => {
   }
 
   isSpinning = true;
+
+  // 🎯 Premio fijo
   const fixedIndex = premios.findIndex(p => p.includes("1 Renovación"));
   const degreesPerPrize = 360 / premios.length;
   const rotation = 360 * 5 + fixedIndex * degreesPerPrize + degreesPerPrize / 2;
@@ -106,10 +106,10 @@ const spinWheel = () => {
       requestAnimationFrame(animate);
     } else {
       isSpinning = false;
-      const premio = premios[fixedIndex];
+
+      const premio = premios[fixedIndex]; // 🎉 SIEMPRE este premio
       resultado.textContent = "¡Felicidades! Ganaste: " + premio;
 
-      // REGISTRAR PREMIO Y MOSTRAR MENSAJE FLOTANTE
       fetch(`${endpoint}?token=${token}&premio=${encodeURIComponent(premio)}`)
         .then(res => res.text())
         .then(data => {
