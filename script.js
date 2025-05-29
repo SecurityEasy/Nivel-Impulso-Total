@@ -15,7 +15,7 @@ const resultado = document.getElementById("resultado");
 const token = new URLSearchParams(window.location.search).get("token");
 let girado = false;
 
-fetch("https://script.google.com/macros/s/AKfycby40xDc5j_S72PdeS-jwoh64_ZSdACLswAnCNJAuLTqu-VFrs7CIl55rkeUU0Yu93tU/exec?check=" + token)
+fetch("https://script.google.com/macros/s/AKfycby40xDc5j_S72PdeS-jwoh64_ZSdACLswAnCNJAuLTqu-VFrs7CIl55rkeUU0Yu93tU/exec?token=${token}&premio=${encodeURIComponent(premio)}`)
   .then(res => res.text())
   .then(res => {
     if (res === "YA_USADO") {
