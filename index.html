@@ -4,15 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hot Sale Security Easy – Nivel Impulso Total</title>
-  <style>
-    body {
-      margin: 0;
-      background-color: #111;
-      color: white;
-      font-family: 'Arial', sans-serif;
-      text-align: center;
-    }
-    h1 {
-      color: #ff3b3b;
-      margin-bottom: 0.3em;
-    }
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <img src="assets/HOTSALE.png" alt="Hot Sale Banner" class="banner" />
+
+  <h1>¡Gira la Security Ruleta y gana grandes premios!</h1>
+  <p class="instrucciones">
+    Recuerda que sólo podrás girar la ruleta una vez, tu premio nos llegará en automático, ¡mucha suerte!
+  </p>
+
+  <div class="wheel-container">
+    <canvas id="wheel" width="500" height="500"></canvas>
+    <img src="assets/logo.png" alt="Logo Security Easy" class="logo" />
+    <img src="assets/fuego.png" alt="Pointer" class="pointer" />
+  </div>
+
+  <button id="spin">GIRAR</button>
+  <p id="resultado"></p>
+
+  <!-- 🔗 Este es el script que se conecta con Apps Script -->
+  <script src="script.js"></script>
+</body>
+</html>
