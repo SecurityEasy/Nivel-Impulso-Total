@@ -16,11 +16,11 @@ const resultado = document.getElementById("resultado");
 const token = new URLSearchParams(window.location.search).get("token");
 let girado = false;
 
-// ✅ URL NUEVA DE APPS SCRIPT
+// ✅ URL DE TU APPS SCRIPT
 const endpoint = "https://script.google.com/macros/s/AKfycbwdUXgKYdj2M6qBU12dd3f2hslZsekVZFmhfcnb584LbCPIdl3BlF5ILjjwOQz3njf_/exec";
 
-// Verifica si ya se usó el token
-fetch(endpoint + "?check=" + token)
+// Verifica si el token ya fue usado
+fetch(`${endpoint}?check=${token}`)
   .then(res => res.text())
   .then(res => {
     if (res === "YA_USADO") {
@@ -111,39 +111,42 @@ const spinWheel = () => {
       const premio = premios[index];
       resultado.textContent = "¡Felicidades! Ganaste: " + premio;
 
-      // Registrar el premio en Apps Script
+      // REGISTRAR PREMIO Y MOSTRAR MENSAJE FLOTANTE
       fetch(`${endpoint}?token=${token}&premio=${encodeURIComponent(premio)}`)
-        .then(response => response.text())
-.then(data => {
-  console.log("✅ Premio registrado: ", data);
-  girado = true;
-  spinButton.disabled = true;
+        .then(res => res.text())
+        .then(data => {
+          console.log("✅ Premio registrado: ", data);
+          girado = true;
+          spinButton.disabled = true;
 
-  // ✅ MENSAJE FLOTANTE DE ÉXITO
-  const notif = document.createElement("div");
-  notif.textContent = "✅ ¡Gracias por participar! Tu premio fue registrado exitosamente 🎁";
-  Object.assign(notif.style, {
-    position: "fixed",
-    top: "20px",
-    left: "50%",
-    transform: "translateX(-50%)",
-    backgroundColor: "#28a745",
-    color: "white",
-    padding: "16px 24px",
-    borderRadius: "10px",
-    fontSize: "1.1rem",
-    boxShadow: "0 8px 20px rgba(0, 0, 0, 0.3)",
-    zIndex: "999999",
-    opacity: "1",
-    transition: "opacity 0.5s ease"
-  });
-  document.body.appendChild(notif);
+          // ✅ MENSAJE FLOTANTE
+          const notif = document.createElement("div");
+          notif.textContent = "✅ ¡Gracias por participar! Tu premio fue registrado exitosamente 🎁";
+          Object.assign(notif.style, {
+            position: "fixed",
+            top: "20px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            backgroundColor: "#28a745",
+            color: "white",
+            padding: "16px 24px",
+            borderRadius: "10px",
+            fontSize: "1.1rem",
+            boxShadow: "0 8px 20px rgba(0, 0, 0, 0.3)",
+            zIndex: "999999",
+            opacity: "1",
+            transition: "opacity 0.5s ease"
+          });
+          document.body.appendChild(notif);
 
-  setTimeout(() => {
-    notif.style.opacity = "0";
-    setTimeout(() => notif.remove(), 500);
-  }, 6000);
-})
+          setTimeout(() => {
+            notif.style.opacity = "0";
+            setTimeout(() => notif.remove(), 500);
+          }, 6000);
+        })
+        .catch(err => console.error("❌ Error:", err));
+    }
+  };
 
   requestAnimationFrame(animate);
 };
@@ -157,7 +160,5 @@ window.addEventListener("resize", () => {
 });
 
 spinButton.addEventListener("click", () => {
-  if (!isSpinning) {
-    spinWheel();
-  }
+  if (!isSpinning) spinWheel();
 });
