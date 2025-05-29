@@ -7,7 +7,6 @@ const premios = [
 ];
 
 const colors = ["#c62828", "#f78f1e", "#fce8d5", "#c62828", "#f78f1e"];
-
 const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
 const spinButton = document.getElementById("spin");
@@ -16,7 +15,6 @@ const resultado = document.getElementById("resultado");
 const token = new URLSearchParams(window.location.search).get("token");
 let girado = false;
 
-// Verifica si ya se usó el token
 fetch("https://script.google.com/macros/s/AKfycby40xDc5j_S72PdeS-jwoh64_ZSdACLswAnCNJAuLTqu-VFrs7CIl55rkeUU0Yu93tU/exec?check=" + token)
   .then(res => res.text())
   .then(res => {
@@ -28,7 +26,6 @@ fetch("https://script.google.com/macros/s/AKfycby40xDc5j_S72PdeS-jwoh64_ZSdACLsw
   });
 
 let canvasSize = 500;
-
 const resizeCanvas = () => {
   canvasSize = Math.min(window.innerWidth * 0.9, 500);
   canvas.width = canvasSize;
@@ -107,16 +104,15 @@ const spinWheel = () => {
       const index = Math.floor((premios.length - (finalAngle / (360 / premios.length))) % premios.length);
       const premio = premios[index];
       resultado.textContent = "¡Felicidades! Ganaste: " + premio;
-      localStorage.setItem("giro_" + token, true);
 
-       fetch(`https://script.google.com/macros/s/AKfycby40xDc5j_S72PdeS-jwoh64_ZSdACLswAnCNJAuLTqu-VFrs7CIl55rkeUU0Yu93tU/exec?token=${token}&premio=${encodeURIComponent(premio)}`)
-        .then(response => response.text())
+      fetch(`https://script.google.com/macros/s/AKfycby40xDc5j_S72PdeS-jwoh64_ZSdACLswAnCNJAuLTqu-VFrs7CIl55rkeUU0Yu93tU/exec?token=${token}&premio=${encodeURIComponent(premio)}`)
+        .then(res => res.text())
         .then(data => {
           console.log("✅ Premio registrado: ", data);
           girado = true;
           spinButton.disabled = true;
         })
-        .catch(error => console.error("❌ Error al registrar premio:", error));
+        .catch(err => console.error("❌ Error:", err));
     }
   };
 
@@ -132,7 +128,5 @@ window.addEventListener("resize", () => {
 });
 
 spinButton.addEventListener("click", () => {
-  if (!isSpinning) {
-    spinWheel();
-  }
+  if (!isSpinning) spinWheel();
 });
