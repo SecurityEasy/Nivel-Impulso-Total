@@ -14,7 +14,18 @@ const spinButton = document.getElementById("spin");
 const resultado = document.getElementById("resultado");
 
 const token = new URLSearchParams(window.location.search).get("token");
-let girado = localStorage.getItem("giro_" + token);
+let girado = false;
+
+// Verifica si ya se usó el token
+fetch("https://script.google.com/macros/s/AKfycby40xDc5j_S72PdeS-jwoh64_ZSdACLswAnCNJAuLTqu-VFrs7CIl55rkeUU0Yu93tU/exec?check=" + token)
+  .then(res => res.text())
+  .then(res => {
+    if (res === "YA_USADO") {
+      girado = true;
+      alert("Este token ya fue utilizado. No puedes girar la ruleta más de una vez.");
+      spinButton.disabled = true;
+    }
+  });
 
 let canvasSize = 500;
 
