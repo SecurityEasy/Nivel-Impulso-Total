@@ -119,26 +119,26 @@ const spinWheel = () => {
   girado = true;
   spinButton.disabled = true;
 
-  // Mensaje flotante bonito
+  // ✅ MENSAJE FLOTANTE DE ÉXITO
   const notif = document.createElement("div");
-  notif.textContent = "✅ Gracias por participar, tu premio ha sido registrado exitosamente. Pronto nos pondremos en contacto.";
-  notif.style.position = "fixed";
-  notif.style.bottom = "30px";
-  notif.style.left = "50%";
-  notif.style.transform = "translateX(-50%)";
-  notif.style.backgroundColor = "#28a745";
-  notif.style.color = "white";
-  notif.style.padding = "15px 25px";
-  notif.style.borderRadius = "8px";
-  notif.style.fontSize = "1rem";
-  notif.style.boxShadow = "0 4px 10px rgba(0,0,0,0.3)";
-  notif.style.zIndex = "9999";
-  notif.style.transition = "opacity 0.5s ease";
-  notif.style.opacity = "1";
-
+  notif.textContent = "✅ ¡Gracias por participar! Tu premio fue registrado exitosamente 🎁";
+  Object.assign(notif.style, {
+    position: "fixed",
+    top: "20px",
+    left: "50%",
+    transform: "translateX(-50%)",
+    backgroundColor: "#28a745",
+    color: "white",
+    padding: "16px 24px",
+    borderRadius: "10px",
+    fontSize: "1.1rem",
+    boxShadow: "0 8px 20px rgba(0, 0, 0, 0.3)",
+    zIndex: "999999",
+    opacity: "1",
+    transition: "opacity 0.5s ease"
+  });
   document.body.appendChild(notif);
 
-  // Quitar el mensaje después de unos segundos
   setTimeout(() => {
     notif.style.opacity = "0";
     setTimeout(() => notif.remove(), 500);
