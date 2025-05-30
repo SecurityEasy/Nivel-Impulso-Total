@@ -6,58 +6,74 @@
   <title>Hot Sale Security Easy – Nivel Impulso Total</title>
   <style>
     body {
-      margin: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
       background-color: #111;
       color: white;
-      font-family: 'Arial', sans-serif;
-      text-align: center;
+      margin: 0;
+      padding: 0;
     }
-    h1 {
-      color: #ff3b3b;
-      margin-bottom: 0.3em;
-    }
-    .instrucciones {
-      margin-top: 0;
-      font-size: 1rem;
-      color: #e2e2e2;
-    }
+
     .banner {
-      max-width: 300px;
-      margin: 10px auto 0;
-      display: block;
+      width: 100%;
+      max-width: 400px;
+      margin-top: 20px;
     }
+
+    h1 {
+      font-size: 24px;
+      margin: 20px 0 10px;
+      color: #ff3b3b;
+    }
+
+    .instrucciones {
+      font-size: 16px;
+      color: #e2e2e2;
+      margin-bottom: 20px;
+    }
+
+    .ruleta-contenedor {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 30px;
+    }
+
     .wheel-wrapper {
       position: relative;
-      display: inline-block;
-      margin: 30px auto 80px;
+      width: 500px;
+      height: 500px;
     }
-    #wheel {
-      background-color: transparent;
+
+    canvas#wheel {
+      width: 100%;
+      height: 100%;
+      display: block;
       border-radius: 50%;
       box-shadow: 0 0 20px rgba(255,255,255,0.2);
     }
+
     .logo {
       position: absolute;
-      top: 50%;
-      left: 50%;
       width: 80px;
       height: 80px;
+      top: 50%;
+      left: 50%;
       transform: translate(-50%, -50%);
       border-radius: 50%;
+      z-index: 10;
     }
+
     .fuego {
-     position: absolute;
-     left: 50%;
-     bottom: -250px;
-     transform: translateX(-50%);
-     width: 350px; /* Puedes subirlo más si lo quieres gigante 😏 */
-     z-index: 999;
-     pointer-events: none;
-   }
-    .boton-wrapper {
-      margin-top: 90px;
-      display: flex;
-      justify-content: center;
+      position: absolute;
+      left: 50%;
+      bottom: -80px;
+      transform: translateX(-50%);
+      width: 150px;
+      z-index: 999;
+      pointer-events: none;
     }
 
     #spin {
@@ -71,9 +87,11 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
+
     #spin:hover {
       background-color: #ffb347;
     }
+
     #resultado {
       font-size: 1.2em;
       margin-top: 20px;
@@ -89,24 +107,16 @@
     Recuerda que sólo podrás girar la ruleta una vez, tu premio nos llegará en automático, ¡mucha suerte!
   </p>
 
-  <div class="wheel-wrapper">
-    <canvas id="wheel" width="500" height="500"></canvas>
-    <img src="assets/logo.png" alt="Logo Security Easy" class="logo" />
-    <img src="assets/fuego.png" alt="Pointer" class="fuego" />
-  </div>
-
   <div class="ruleta-contenedor">
-  <div class="wheel-wrapper">
-    <canvas id="wheel" width="500" height="500"></canvas>
-    <img src="assets/logo.png" alt="Logo Security Easy" class="logo" />
-    <img src="assets/fuego.png" alt="Pointer" class="fuego" />
+    <div class="wheel-wrapper">
+      <canvas id="wheel" width="500" height="500"></canvas>
+      <img src="assets/logo.png" alt="Logo Security Easy" class="logo" />
+      <img src="assets/fuego.png" alt="Pointer" class="fuego" />
+    </div>
+
+    <button id="spin">GIRAR</button>
+    <p id="resultado"></p>
   </div>
-
-  <button id="spin">GIRAR</button>
-</div>
-
-  <button id="spin">GIRAR</button>
-  <p id="resultado"></p>
 
   <script src="script.js"></script>
 </body>
