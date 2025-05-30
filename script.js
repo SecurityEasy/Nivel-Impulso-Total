@@ -80,12 +80,13 @@ const spinWheel = () => {
 
   isSpinning = true;
 
-  // 🎯 Premio fijo
-  const fixedIndex = premios.findIndex(p => p.includes("1 Renovación"));
+  const fixedIndex = 1; // Siempre caerá en “1 Renovación Anual”
   const degreesPerPrize = 360 / premios.length;
-  const pointerOffset = 90; // Donde apunta la flechita (normalmente arriba: 90°)
-  const rotation = 360 * 5 - (fixedIndex * degreesPerPrize + degreesPerPrize / 2);
+  const vueltas = 7; // Dale más vueltas si quieres que se vea más dramático 😏
 
+  const pointerOffset = 90; // Porque el fuego está abajo
+  const destino = fixedIndex * degreesPerPrize + degreesPerPrize / 2;
+  const rotation = vueltas * 360 + (360 - destino + pointerOffset);
   const duration = 5000;
   const start = performance.now();
 
