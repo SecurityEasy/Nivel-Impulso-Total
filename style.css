@@ -60,7 +60,7 @@ canvas#wheel {
   left: 50%;
   bottom: -40px; /* Baja el fueguito más si quieres */
   transform: translateX(-50%);
-  width: 140px; /* Tamaño del fueguito */
+  width: 320px; /* Tamaño del fueguito */
   z-index: 999;
   pointer-events: none;
 }
