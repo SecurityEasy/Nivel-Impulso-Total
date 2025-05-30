@@ -84,7 +84,7 @@ const spinWheel = () => {
   const fixedIndex = premios.findIndex(p => p.includes("1 Renovación"));
   const degreesPerPrize = 360 / premios.length;
   const pointerOffset = 90; // Donde apunta la flechita (normalmente arriba: 90°)
-  const rotation = 360 * 5 + (360 - (fixedIndex * degreesPerPrize + degreesPerPrize / 2)) + pointerOffset;
+  const rotation = 360 * 5 - (fixedIndex * degreesPerPrize + degreesPerPrize / 2);
 
   const duration = 5000;
   const start = performance.now();
