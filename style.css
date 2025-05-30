@@ -23,49 +23,60 @@ h1 {
   margin-bottom: 20px;
 }
 
-.wheel-wrapper {
-  position: relative;
-  width: fit-content;
-  margin: auto;
+.ruleta-contenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px; /* Espacio entre ruleta y botón */
+  margin-top: 30px;
 }
 
-canvas {
-  border-radius: 50%;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+.wheel-wrapper {
+  position: relative;
+  width: 500px;
+  height: 500px;
+}
+
+canvas#wheel {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .logo {
   position: absolute;
-  width: 100px;
+  width: 80px;
+  height: 80px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 2;
+  border-radius: 50%;
+  z-index: 10;
 }
 
 .fuego {
   position: absolute;
-  bottom: -10px;
   left: 50%;
-  transform: translateX(-50%) rotate(180deg);
-  width: 40px;
-  z-index: 10;
+  bottom: -40px; /* Baja el fueguito más si quieres */
+  transform: translateX(-50%);
+  width: 140px; /* Tamaño del fueguito */
+  z-index: 999;
+  pointer-events: none;
 }
 
 #spin {
-  margin-top: 30px;
-  padding: 15px 30px;
-  font-size: 18px;
+  padding: 12px 30px;
   background-color: #f78f1e;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 25px;
+  font-size: 18px;
+  font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-#resultado {
-  font-size: 18px;
-  margin-top: 20px;
-  color: #c62828;
-  font-weight: bold;
+#spin:hover {
+  background-color: #ffb347;
 }
