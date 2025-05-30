@@ -1,85 +1,71 @@
 body {
-  margin: 0;
-  font-family: 'Arial', sans-serif;
-  background-color: #111;
-  color: white;
+  font-family: Arial, sans-serif;
   text-align: center;
-}
-
-h1 {
-  color: #ff3c3c;
-  margin-top: 20px;
-}
-
-p.instrucciones {
-  font-size: 1rem;
-  margin-top: -10px;
-  margin-bottom: 30px;
-  color: #e2e2e2;
+  background-color: #fce8d5;
+  margin: 0;
+  padding: 0;
 }
 
 .banner {
-  width: 90%;
-  max-width: 350px;
-  margin: 20px auto;
-  display: block;
+  width: 100%;
+  max-width: 600px;
+  margin-top: 20px;
+}
+
+h1 {
+  font-size: 24px;
+  margin: 20px 0 10px;
+  color: #c62828;
+}
+
+.instrucciones {
+  font-size: 16px;
+  margin-bottom: 20px;
 }
 
 .wheel-wrapper {
   position: relative;
-  width: 500px;
-  max-width: 90%;
-  margin: 0 auto;
+  width: fit-content;
+  margin: auto;
 }
 
 canvas {
-  width: 100%;
-  height: auto;
   border-radius: 50%;
-  box-shadow: 0 0 20px rgba(255,255,255,0.2);
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
 }
 
 .logo {
   position: absolute;
-  width: 80px;
-  height: 80px;
+  width: 100px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
-  border-radius: 50%;
-  overflow: hidden;
-  object-fit: cover;
-  border: 3px solid white;
 }
 
 .fuego {
   position: absolute;
-  top: 50%;
+  bottom: -10px;
   left: 50%;
-  width: 250px;
-  transform: translate(120px, -50%) rotate(-25deg);
-  z-index: 3;
+  transform: translateX(-50%) rotate(180deg);
+  width: 40px;
+  z-index: 10;
 }
 
 #spin {
   margin-top: 30px;
-  padding: 12px 30px;
+  padding: 15px 30px;
+  font-size: 18px;
   background-color: #f78f1e;
   color: white;
   border: none;
-  border-radius: 25px;
-  font-size: 18px;
-  font-weight: bold;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-#spin:hover {
-  background-color: #ffb347;
 }
 
 #resultado {
-  font-size: 1.2em;
+  font-size: 18px;
   margin-top: 20px;
+  color: #c62828;
+  font-weight: bold;
 }
