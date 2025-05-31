@@ -12,13 +12,15 @@ const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
 const spinButton = document.getElementById("spin");
 const resultado = document.getElementById("resultado");
-const fuego = document.querySelector(".fuego");
+const fuego = document.getElementById("fuego");
 
 const token = new URLSearchParams(window.location.search).get("token");
 let girado = false;
 
+// ✅ URL DE TU APPS SCRIPT
 const endpoint = "https://script.google.com/macros/s/AKfycbwdUXgKYdj2M6qBU12dd3f2hslZsekVZFmhfcnb584LbCPIdl3BlF5ILjjwOQz3njf_/exec";
 
+// ✅ Verifica si el token ya fue usado
 fetch(`${endpoint}?check=${token}`)
   .then(res => res.text())
   .then(res => {
@@ -80,9 +82,11 @@ const spinWheel = () => {
   }
 
   isSpinning = true;
+  fuego.style.display = "none"; // 🔥 Ocultamos el fueguito antes de girar
+
   const fixedIndex = premios.findIndex(p => p.includes("1 Renovación"));
   const degreesPerPrize = 360 / premios.length;
-  const pointerOffset = 90;
+  const pointerOffset = 90; // 🔺 Donde apunta el fueguito (arriba)
   const rotation = 360 * 5 + (360 - (fixedIndex * degreesPerPrize + degreesPerPrize / 2)) + pointerOffset;
 
   const duration = 5000;
@@ -93,8 +97,6 @@ const spinWheel = () => {
     if (progress > 1) progress = 1;
 
     angle = rotation * progress;
-
-    fuego.style.transform = `translateX(-50%) rotate(${angle}deg)`;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.save();
@@ -108,15 +110,45 @@ const spinWheel = () => {
       requestAnimationFrame(animate);
     } else {
       isSpinning = false;
+
       const premio = premios[fixedIndex];
       resultado.textContent = "¡Felicidades! Ganaste: " + premio;
 
       fetch(`${endpoint}?token=${token}&premio=${encodeURIComponent(premio)}`)
         .then(res => res.text())
         .then(data => {
+          console.log("✅ Premio registrado: ", data);
           girado = true;
           spinButton.disabled = true;
-        });
+
+          fuego.style.display = "block"; // 🔥 Mostramos el fueguito al final
+
+          // ✅ MENSAJE FLOTANTE
+          const notif = document.createElement("div");
+          notif.textContent = "✅ ¡Gracias por participar! Tu premio fue registrado exitosamente 🎁";
+          Object.assign(notif.style, {
+            position: "fixed",
+            top: "20px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            backgroundColor: "#28a745",
+            color: "white",
+            padding: "16px 24px",
+            borderRadius: "10px",
+            fontSize: "1.1rem",
+            boxShadow: "0 8px 20px rgba(0, 0, 0, 0.3)",
+            zIndex: "999999",
+            opacity: "1",
+            transition: "opacity 0.5s ease"
+          });
+          document.body.appendChild(notif);
+
+          setTimeout(() => {
+            notif.style.opacity = "0";
+            setTimeout(() => notif.remove(), 500);
+          }, 6000);
+        })
+        .catch(err => console.error("❌ Error:", err));
     }
   };
 
