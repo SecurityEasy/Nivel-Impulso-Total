@@ -69,7 +69,7 @@ const drawWheel = () => {
   }
 };
 
-let angle = 144; // Comienza apuntando a otro premio visualmente
+let angle = 195; // Comienza apuntando a otro premio visualmente
 let isSpinning = false;
 
 const spinWheel = () => {
