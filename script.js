@@ -69,9 +69,7 @@ const drawWheel = () => {
   }
 };
 
-let initialFakeAngle = 144; // Por ejemplo: empieza apuntando al segundo premio (ajústalo si quieres otro)
-angle = initialFakeAngle;
-let angle = 0;
+let angle = 144; // Comienza apuntando a otro premio visualmente
 let isSpinning = false;
 
 const spinWheel = () => {
