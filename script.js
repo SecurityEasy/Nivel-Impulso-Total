@@ -13,6 +13,7 @@ const ctx = canvas.getContext("2d");
 const spinButton = document.getElementById("spin");
 const resultado = document.getElementById("resultado");
 const fuego = document.getElementById("fuego");
+      fuego.style.visibility = "hidden"; // 🔥 Ocultar el fueguito al cargar la págin
 
 const token = new URLSearchParams(window.location.search).get("token");
 let girado = false;
@@ -82,7 +83,7 @@ const spinWheel = () => {
   }
 
   isSpinning = true;
-  fuego.style.display = "none"; // 🔥 Ocultamos el fueguito antes de girar
+  fuego.style.visibility = "hidden";
 
   const fixedIndex = premios.findIndex(p => p.includes("1 Renovación"));
   const degreesPerPrize = 360 / premios.length;
@@ -121,7 +122,7 @@ const spinWheel = () => {
           girado = true;
           spinButton.disabled = true;
 
-          fuego.style.display = "block"; // 🔥 Mostramos el fueguito al final
+          fuego.style.visibility = "visible";
 
           // ✅ MENSAJE FLOTANTE
           const notif = document.createElement("div");
