@@ -69,6 +69,8 @@ const drawWheel = () => {
   }
 };
 
+let initialFakeAngle = 144; // Por ejemplo: empieza apuntando al segundo premio (ajústalo si quieres otro)
+angle = initialFakeAngle;
 let angle = 0;
 let isSpinning = false;
 
@@ -88,7 +90,8 @@ const spinWheel = () => {
   const fixedIndex = premios.findIndex(p => p.includes("1 Renovación"));
   const degreesPerPrize = 360 / premios.length;
   const pointerOffset = 90; // 🔺 Donde apunta el fueguito (arriba)
-  const rotation = 360 * 5 + (360 - (fixedIndex * degreesPerPrize + degreesPerPrize / 2)) + pointerOffset;
+  const targetAngle = (360 - (fixedIndex * degreesPerPrize + degreesPerPrize / 2)) + pointerOffset;
+  const rotation = 360 * 5 + targetAngle - angle;
 
   const duration = 5000;
   const start = performance.now();
