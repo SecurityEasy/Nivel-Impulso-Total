@@ -39,6 +39,7 @@
       justify-content: center;
       gap: 30px;
       margin-top: 30px;
+      margin-bottom: 50px;
     }
 
     .wheel-wrapper {
@@ -69,14 +70,15 @@
     .fuego {
       position: absolute;
       left: 50%;
-      bottom: -217px;
+      bottom: -177px;
       transform: translateX(-50%);
-      width: 300px;
+      width: 200px;
       z-index: 999;
       pointer-events: none;
     }
 
     #spin {
+      margin-top: 2rem;
       padding: 12px 30px;
       background-color: #f78f1e;
       color: white;
@@ -113,11 +115,10 @@
     <img src="assets/logo.png" alt="Logo Security Easy" class="logo" />
     <img src="assets/fuego.png" alt="Pointer" class="fuego" id="fuego" />
  </div>
-
     <button id="spin">GIRAR</button>
     <p id="resultado"></p>
   </div>
-
+  <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
