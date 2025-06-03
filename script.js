@@ -83,7 +83,7 @@ const drawWheel = () => {
 let angle = 195; // Comienza apuntando a otro premio visualmente
 let isSpinning = false;
 
-function findAgle() {
+function findAngle() {
   const fixedIndex = premios.findIndex((p) => p.includes("1 Renovación"));
   const degreesPerPrize = 360 / premios.length;
   const pointerOffset = -degreesPerPrize; // 🔺 Donde apunta el fueguito (arriba)
@@ -105,7 +105,7 @@ const spinWheel = () => {
 
   isSpinning = true;
 
-  const [rotation, fixedIndex] = findAgle();
+  const [rotation, fixedIndex] = findAngle();
   const duration = 5000;
   const start = performance.now();
 
@@ -123,7 +123,7 @@ const spinWheel = () => {
     drawWheel();
     ctx.restore();
 
-    if (progress < 1 && rotation !== findAgle()[0]) {
+    if (progress < 1 && rotation !== findAngle()[0]) {
       requestAnimationFrame(animate);
     } else {
       isSpinning = false;
