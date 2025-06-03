@@ -58,11 +58,12 @@ canvas#wheel {
 .fuego {
   position: absolute;
   left: 50%;
-  bottom: -177px;
+  bottom: 0px;
   transform: translateX(-50%);
-  width: 200px;
+  width: 320px;
   z-index: 999;
   pointer-events: none;
+  visibility: hidden; /* <-- CAMBIA display: none por ESTO */
 }
 
 #spin {
